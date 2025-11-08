@@ -1,0 +1,4 @@
+devops_app/
+    k8s/
+        service.yaml
+        deployment.yaml

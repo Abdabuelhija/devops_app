@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simple-nginx
+  name: devops-app
   labels:
-    app: simple-nginx
+    app: devops-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: simple-nginx
+      app: devops-app
   template:
     metadata:
       labels:
-        app: simple-nginx
+        app: devops-app
     spec:
       containers:
         - name: nginx

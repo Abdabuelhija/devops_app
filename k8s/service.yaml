@@ -1,11 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: simple-nginx
+  name: devops-app
+  labels:
+    app: devops-app
 spec:
   type: ClusterIP
   selector:
-    app: simple-nginx
+    app: devops-app
   ports:
     - port: 80
       targetPort: 80

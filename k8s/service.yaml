@@ -4,6 +4,8 @@ metadata:
   name: devops-app
   labels:
     app: devops-app
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   type: ClusterIP
   selector:

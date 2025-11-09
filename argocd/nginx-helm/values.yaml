@@ -1,0 +1,98 @@
+# values.yaml (excerpt / key sections) for bitnami/nginx
+fullnameOverride: ""
+nameOverride: ""
+
+image:
+  registry: docker.io
+  repository: bitnami/nginx
+  tag: ""
+  pullPolicy: IfNotPresent
+
+containerPorts:
+  http: 8080
+  https: 8443
+
+service:
+  type: ClusterIP
+  httpPort: 80
+  httpsPort: 443
+  externalTrafficPolicy: ""
+  annotations: {}
+  labels: {}
+
+ingress:
+  enabled: false
+  hostname: ""
+  pathType: ImplementationSpecific
+  tls: []
+  extraHosts: []
+  extraAnnotations: {}
+  extraLabels: {}
+  path: /
+  apiVersion: networking.k8s.io/v1
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+podSecurityContext: {}
+securityContext: {}
+
+metrics:
+  enabled: false
+  service:
+    annotations: {}
+    labels: {}
+    type: ClusterIP
+    port: 9113
+
+extraConfigmapMounts: []
+extraDeploy: []
+extraInitContainers: []
+extraContainers: []
+extraVolumes: []
+extraVolumeMounts: []
+
+livenessProbe:
+  enabled: true
+  path: /
+  port: http
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+  httpHeaders: []
+
+readinessProbe:
+  enabled: true
+  path: /
+  port: http
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 1
+  failureThreshold: 6
+  successThreshold: 1
+  httpHeaders: []
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+logFormat: ""
+priorityClassName: ""
+
+podAnnotations: {}
+podLabels: {}
+
+updateStrategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 1
+    maxSurge: 1
+
+

@@ -1,0 +1,16 @@
+# Basic customizations to prove it's "your" deployment
+replicaCount: 2
+
+service:
+  type: NodePort
+  nodePorts:
+    http: 30080   # optional: pick a free port if using bare metal/minikube
+
+# Serve a custom page at "/"
+serverBlock: |
+  server {
+    listen 0.0.0.0:8080;
+    location / {
+      return 200 "Hello from devops_app via ArgoCD + Helm!\n";
+    }
+  }

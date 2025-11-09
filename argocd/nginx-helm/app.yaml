@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-helm
+  namespace: argocd
+spec:
+  project: default
+
+  # Multiple Sources: 1) Helm chart repo, 2) Your Git repo with values file
+  sources:
+    - repoURL: https://charts.bitnami.com/bitnami
+      chart: nginx
+      targetRevision: 18.*             # or a fixed version like "18.2.7"
+      helm:
+        valueFiles:
+          - $values/argocd/nginx-helm/values.yaml
+    - repoURL: https://github.com/Abdabuelhija/devops_app
+      targetRevision: HEAD
+      ref: values                      # <-- this ref name is used above as $values/
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: web
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
